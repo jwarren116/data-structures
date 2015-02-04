@@ -21,7 +21,9 @@ class LinkedList(object):
 
     def pop(self):
         # pops first value from list and returns it
-        pass
+        obsoleteNode = self.firstNode
+        self.firstNode = self.firstNode.nextNode
+        return obsoleteNode
 
     def size(self):
         # returns length of list
@@ -38,7 +40,11 @@ class LinkedList(object):
 
     def remove(self, node):
         # remove node from list, wherever it might be
-        pass
+        if size == 0:
+            return "List is empty"
+        else: 
+            pass
+
 
     def display(self):
         # print list as python tuple literal
