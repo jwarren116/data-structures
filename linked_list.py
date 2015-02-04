@@ -1,13 +1,23 @@
 #!/usr/bin/env python
 
 
-class SinglyLinked(object):
-    def __init__(self):
-        pass
+class Node(object):
+    def __init__(self, data, nextNode=None):
+        self.data = data
+        self.nextNode = nextNode
 
-    def insert(self, val):
-        # insert val at beginning of list
-        pass
+
+class LinkedList(object):
+    def __init__(self, firstNode=None):
+        self.firstNode = firstNode
+
+    def insert(self, newNode):
+        # insert newNode at beginning of list
+        if not self.firstNode:
+            self.firstNode = newNode
+        else:
+            newNode.nextNode = self.firstNode
+            self.firstNode = newNode
 
     def pop(self):
         # pops first value from list and returns it
@@ -25,7 +35,8 @@ class SinglyLinked(object):
         # remove node from list, wherever it might be
         pass
 
-    def print_(self):
+    def display(self):
         # print list as python tuple literal
         # (bonus points if you make it appear like "(12, 'sam', 32, 'fred')")
-        pass
+        for node in self:
+            print self.firstNode
