@@ -46,10 +46,24 @@ class LinkedList(object):
 
     def remove(self, node):
         # remove node from list, wherever it might be
-        if self.size == 0:
-            return "List is empty"
+        if self.size() == 0:
+            return "THE LIST! IT'S EMPTY!!"
         else:
-            pass
+            prevNode = None
+            currentNode = self.firstNode
+            foundNode = False
+            while not foundNode:
+                if currentNode == node:
+                    foundNode = True
+                elif currentNode is None:
+                    return "Value not found in list."
+                else:
+                    prevNode = currentNode
+                    currentNode = currentNode.nextNode
+            if prevNode is None:
+                self.firstNode = currentNode.nextNode
+            else:
+                prevNode.nextNode = currentNode.nextNode
 
     def display(self):
         # print list as python tuple literal
