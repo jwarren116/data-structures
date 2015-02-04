@@ -25,7 +25,12 @@ class LinkedList(object):
 
     def size(self):
         # returns length of list
-        pass
+        currentNode = self.firstNode
+        size = 0
+        while currentNode is not None:
+            size += 1
+            currentNode = self.nextNode
+        return size
 
     def search(self, val):
         # return node containing 'val' in list, if present (else None)
