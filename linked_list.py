@@ -36,15 +36,20 @@ class LinkedList(object):
 
     def search(self, val):
         # return node containing 'val' in list, if present (else None)
-        pass
+        currentNode = self.firstNode
+        while currentNode != val:
+            if self.nextNode is None:
+                return None
+            else:
+                currentNode = self.nextNode
+        return val
 
     def remove(self, node):
         # remove node from list, wherever it might be
-        if size == 0:
+        if self.size == 0:
             return "List is empty"
-        else: 
+        else:
             pass
-
 
     def display(self):
         # print list as python tuple literal
