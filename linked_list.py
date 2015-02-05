@@ -65,7 +65,7 @@ class LinkedList(object):
                 if currentNode == node:
                     foundNode = True
                 elif currentNode is None:
-                    return "Value not found in list."
+                    raise ValueError()
                 else:
                     prevNode = currentNode
                     currentNode = currentNode.nextNode
