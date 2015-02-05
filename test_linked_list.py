@@ -28,3 +28,48 @@ def test_add_second_node():
     newList.insert(bob)
     newList.insert(joe)
     assert newList.firstNode.nextNode.data == "Bob"
+
+
+def test_pop():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    assert newList.pop() == "Joe"
+
+
+def test_size():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    assert newList.size() == 2
+
+
+def test_search_fail():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    assert newList.search("Fred") is None
+
+
+def test_search_success():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    assert newList.search("Bob") == bob
+
+
+def test_remove():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    assert newList.remove("Bob")
