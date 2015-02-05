@@ -22,7 +22,7 @@ class StackFrame(object):
     def pop(self):
         # poops first value from list and returns it
         if self.first_item is None:
-            return ValueError("No items in stack!")
+            raise ValueError("No items in stack!")
         else:
             obsolete_item = self.first_item
             self.first_item = self.first_item.next_item
