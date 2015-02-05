@@ -72,10 +72,11 @@ def test_remove():
     newList = LinkedList()
     newList.insert(bob)
     newList.insert(joe)
-    assert newList.remove("Bob")
+    newList.remove(bob)
+    assert newList.search("Bob") is None
 
 
-def test_remove_empy():
+def test_remove_empty():
     newList = LinkedList()
     assert newList.remove("Bob") == "THE LIST! IT'S EMPTY!!"
 
@@ -88,7 +89,3 @@ def test_remove_fail():
     newList.insert(joe)
     with pytest.raises(ValueError):
         newList.remove("Fred")
-
-
-
-
