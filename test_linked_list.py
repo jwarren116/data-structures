@@ -1,6 +1,6 @@
 from linked_list import Node
 from linked_list import LinkedList
-
+import pytest
 
 def test_node_data():
     newNode = Node("Bob")
@@ -73,3 +73,22 @@ def test_remove():
     newList.insert(bob)
     newList.insert(joe)
     assert newList.remove("Bob")
+
+
+def test_remove_empy():
+    newList = LinkedList()
+    assert newList.remove("Bob") == "THE LIST! IT'S EMPTY!!"
+
+
+def test_remove_fail():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    with pytest.raises(ValueError):
+        newList.remove("Fred")
+
+
+
+
