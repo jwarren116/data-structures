@@ -2,6 +2,7 @@ from linked_list import Node
 from linked_list import LinkedList
 import pytest
 
+
 def test_node_data():
     newNode = Node("Bob")
     assert newNode.data == "Bob"
@@ -37,6 +38,16 @@ def test_pop():
     newList.insert(bob)
     newList.insert(joe)
     assert newList.pop() == "Joe"
+
+
+def test_pop_size():
+    joe = Node("Joe")
+    bob = Node("Bob")
+    newList = LinkedList()
+    newList.insert(bob)
+    newList.insert(joe)
+    newList.pop()
+    assert newList.size() == 1
 
 
 def test_size():
@@ -79,6 +90,11 @@ def test_remove():
 def test_remove_empty():
     newList = LinkedList()
     assert newList.remove("Bob") == "THE LIST! IT'S EMPTY!!"
+
+
+def test_pop_empty():
+    newList = LinkedList()
+    assert newList.pop() == "THE LIST! IT'S EMPTY!!"
 
 
 def test_remove_fail():
