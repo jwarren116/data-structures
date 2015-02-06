@@ -13,11 +13,12 @@ class Stack(object):
 
     def push(self, val):
         # push val to beginning of list
+        self.new_item = StackItem(val)
         if not self.first_item:
-            self.first_item = StackItem(val)
+            self.first_item = self.new_item
         else:
-            self.first_item.next_item = self.first_item
-            self.first_item = StackItem(val)
+            self.new_item.next_item = self.first_item
+            self.first_item = self.new_item
 
     def pop(self):
         # poops first value from list and returns it
