@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import unicode_literals
 
 
 class Node(object):
@@ -7,32 +8,33 @@ class Node(object):
         self.nextNode = nextNode
 
     def __str__(self):
-        return self.data
+        return str(self.data)
 
     def __repr__(self):
-        return self.data
+        return repr(self.data)
 
 
 class LinkedList(object):
     def __init__(self, firstNode=None):
         self.firstNode = firstNode
 
-    def insert(self, newNode):
-        # insert newNode at beginning of list
+    def insert(self, val):
+        # insert val at beginning of list
+        self.newNode = Node(val)
         if not self.firstNode:
-            self.firstNode = newNode
+            self.firstNode = self.newNode
         else:
-            newNode.nextNode = self.firstNode
-            self.firstNode = newNode
+            self.newNode.nextNode = self.firstNode
+            self.firstNode = self.newNode
 
     def pop(self):
         # pops first value from list and returns it
         if self.size() == 0:
-            return "THE LIST! IT'S EMPTY!!"
+            raise ValueError("The list is empty")
         else:
             obsoleteNode = self.firstNode
             self.firstNode = self.firstNode.nextNode
-            return obsoleteNode.data
+            return obsoleteNode.data.encode('utf-8')
 
     def size(self):
         # returns length of list
@@ -46,6 +48,8 @@ class LinkedList(object):
     def search(self, val):
         # return node containing 'val' in list, if present (else None)
         currentNode = self.firstNode
+        if currentNode.data is None:
+            raise ValueError()
         while currentNode.data != val:
             if currentNode.nextNode is None:
                 return None
@@ -56,15 +60,12 @@ class LinkedList(object):
     def remove(self, node):
         # remove node from list, wherever it might be
         if self.size() == 0:
-            return "THE LIST! IT'S EMPTY!!"
+            raise ValueError("The list is empty")
         else:
             prevNode = None
             currentNode = self.firstNode
-            foundNode = False
-            while not foundNode:
-                if currentNode == node:
-                    foundNode = True
-                elif currentNode is None:
+            while currentNode is not node:
+                if currentNode is None:
                     raise ValueError()
                 else:
                     prevNode = currentNode
@@ -80,6 +81,6 @@ class LinkedList(object):
         display = "("
         currentNode = self.firstNode
         while currentNode is not None:
-            display += currentNode.data + ", "
+            display += currentNode.data.encode('utf-8') + ", "
             currentNode = currentNode.nextNode
         return display + ")"
