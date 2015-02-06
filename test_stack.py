@@ -16,9 +16,9 @@ def test_stack_push_multi():
     new_stack.push("bacon")
     new_stack.push("steak")
     new_stack.push("grilled cheese")
-    # new_stack.pop()
     new_stack.pop()
-    assert new_stack.pop() == "steak"
+    new_stack.pop()
+    assert new_stack.pop() == "bacon"
 
 
 def test_empty_stack_pop():
