@@ -1,14 +1,21 @@
 
-from parenthetics import isequal
-import pytest
+from parenthetics import Parenthentic
+# import pytest
 
 
-def test_isequal():
+def test_isone():
+    text = Parenthentic()
     text.isequal("(")
-    assert count == "1"
+    assert text.count == "1"
 
+
+def test_isneg():
+    text = Parenthentic()
     text.isequal(")")
-    assert count == "-1"
+    assert text.count == "-1"
 
+
+def test_iszero():
+    text = Parenthentic()
     text.isequal("()")
-    assert count == "0"
+    assert text.count == "0"
