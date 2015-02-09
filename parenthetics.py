@@ -12,13 +12,15 @@ by one that opens)
 """
 
 
-def f(inp):
+def parenthetics(inp):
     count = 0
     for char in inp:
         if char == "(":
             count += 1
         if char == ")":
             count -= 1
+            if count < 0:
+                return -1
 
     if count >= 1:
         return 1
@@ -26,19 +28,3 @@ def f(inp):
         return -1
     else:
         return 0
-
-
-print "()"
-print f("()")
-print
-print ")"
-print f(")")
-print
-print "("
-print f("(")
-print
-print "))(("
-print f("))((")
-print
-print "(())"
-print f("(())")
