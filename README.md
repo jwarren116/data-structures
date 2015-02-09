@@ -6,4 +6,6 @@ We created a linked list method where the list knows about the first element, an
 
 We also created a stack where an element can be added to the top of the stack, and popped from the top. But they are not linked and you can only manipulate the top of the stack.
 
+I created a function to test for proper parenthetics in a given input. If there are too many opening parentheses, the function will return 1. If there are closed parentheses before opening parentheses, it will return -1. Otherwise, the function returns 0 to show the input is balanced.
+
 This repository is a collaboration between Jake Anderson and James Warren while attending the Code Fellows Python Development Accelerator in Winter 2015.
