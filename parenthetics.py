@@ -9,4 +9,5 @@ class Parenthentic(object):
                 count += 1
             if par == ')':
                 count -= 1
-            return count
+                return count
+        return count
