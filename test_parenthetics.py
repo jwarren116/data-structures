@@ -24,3 +24,11 @@ def test_multi_open_close_2():
 
 def test_broken():
     assert parenthetics("))((") == -1
+
+
+def test_text():
+    assert parenthetics("This is a silly test!") == 0
+
+
+def test_text_parens():
+    assert parenthetics("This is a silly test (but not really that silly)!") == 0
