@@ -18,11 +18,18 @@ def test_enqueue_multi():
 
 
 def test_dequeue():
-    pass
+    queue = Queue()
+    queue.enqueue("Bacon")
+    assert queue.dequeue() == "Bacon"
+    assert queue.size() == 0
 
 
 def test_dequeue_multi():
-    pass
+    queue = Queue()
+    queue.enqueue("Bacon")
+    queue.enqueue("Beer")
+    assert queue.dequeue() == "Bacon"
+    assert queue.last_item.data == "Beer"
 
 
 def test_size():
