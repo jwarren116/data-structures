@@ -6,7 +6,7 @@ import pytest
 def test_enqueue():
     queue = Queue()
     queue.enqueue("Bacon")
-    assert queue.size() == 1
+    assert queue.last_item.data == "Bacon"
 
 
 def test_enqueue_multi():
@@ -14,7 +14,7 @@ def test_enqueue_multi():
     queue.enqueue("Bacon")
     queue.enqueue("Steak")
     queue.enqueue("Beer")
-    assert queue.size() == 3
+    assert queue.first_item.data == "Beer"
 
 
 def test_dequeue():
@@ -33,4 +33,17 @@ def test_dequeue_multi():
 
 
 def test_size():
-    pass
+    queue = Queue()
+    queue.enqueue("Bacon")
+    queue.enqueue("Beer")
+    assert queue.size() == 2
+
+
+def test_size_with_remove():
+    queue = Queue()
+    queue.enqueue("Bacon")
+    queue.enqueue("Beer")
+    queue.enqueue("Cow")
+    queue.enqueue("Whiskey")
+    queue.dequeue()
+    assert queue.size() == 3
