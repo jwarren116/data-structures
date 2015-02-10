@@ -52,3 +52,18 @@ def test_shift_empty():
     linked = DoubleLinked()
     with pytest.raises(ValueError):
         linked.shift()
+
+
+def test_remove_one():
+    linked = DoubleLinked()
+    linked.insert("Bob")
+    linked.remove("Bob")
+    assert linked.first_item is None
+
+
+def test_remove_multi():
+    linked = DoubleLinked()
+    linked.insert("Bob")
+    linked.insert("Fred")
+    linked.remove("Fred")
+    assert linked.first_item == "Bob"
