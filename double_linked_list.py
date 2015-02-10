@@ -42,7 +42,7 @@ class DoubleLinked(object):
         else:
             obsolete_item.next_item.prev_item = None
             self.first_item = self.first_item.next_item
-        return obsolete_item.data
+        return obsolete_item.val
 
     def shift(self):
         # pops last value from list and returns it
@@ -54,4 +54,4 @@ class DoubleLinked(object):
         else:
             obsolete_item.prev_item.next_item = None
             self.last_item = self.last_item.prev_item
-        return obsolete_item.data
+        return obsolete_item.val
