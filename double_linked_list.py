@@ -43,3 +43,15 @@ class DoubleLinked(object):
             obsolete_item.next_item.prev_item = None
             self.first_item = self.first_item.next_item
         return obsolete_item.data
+
+    def shift(self):
+        # pops last value from list and returns it
+        obsolete_item = self.last_item
+        if self.last_item is None:
+            raise ValueError("No items in list!")
+        elif self.first_item is obsolete_item:
+            self.first_item = self.last_item = None
+        else:
+            obsolete_item.prev_item.next_item = None
+            self.last_item = self.last_item.prev_item
+        return obsolete_item.data
