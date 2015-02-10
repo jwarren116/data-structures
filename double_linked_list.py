@@ -55,3 +55,19 @@ class DoubleLinked(object):
             obsolete_item.prev_item.next_item = None
             self.last_item = self.last_item.prev_item
         return obsolete_item.val
+
+    def remove(self, val):
+        # remove val from list, wherever it might be
+        if self.first_item is None:
+            raise ValueError("The list is empty")
+        else:
+            current_item = self.first_item
+            while current_item.val != val:
+                if current_item is None:
+                    raise ValueError("Value not found in list")
+                else:
+                    current_item = current_item.next_item
+            if current_item.prev_item is None:
+                self.first_item = current_item.next_item
+            else:
+                current_item.prev_item.next_item = current_item.next_item
