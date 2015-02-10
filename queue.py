@@ -18,30 +18,29 @@ class Queue(object):
 
     def enqueue(self, val):
         # adds val to beginning of queue
-        new_item = QueueItem(val)
+        new_item = QueueItem(val, next_item=self.last_item)
         if not self.first_item:
             self.first_item = self.last_item = new_item
         else:
-            new_item.next_item = self.first_item
-            self.first_item.prev_item = new_item
-            self.first_item = new_item
+            self.last_item.prev_item = new_item
+            self.last_item = new_item
 
     def dequeue(self):
         # pops last value from list and returns it
-        obsolete_item = self.last_item
-        if self.last_item is None:
+        obsolete_item = self.first_item
+        if self.first_item is None:
             raise ValueError("No items in queue!")
-        elif self.first_item is obsolete_item:
-            self.last_item = self.first_item = None
+        elif self.last_item is obsolete_item:
+            self.first_item = self.last_item = None
         else:
             obsolete_item.prev_item.next_item = None
-            self.last_item = self.last_item.prev_item
+            self.first_item = self.first_item.prev_item
         return obsolete_item.data
 
     def size(self):
         # returns size of the queue, returns 0 if empty
         size = 0
-        current_item = self.first_item
+        current_item = self.last_item
         while current_item is not None:
             size += 1
             current_item = current_item.next_item

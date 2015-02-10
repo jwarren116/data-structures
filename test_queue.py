@@ -13,7 +13,7 @@ def test_enqueue_multi_last_item():
     queue.enqueue("Bacon")
     queue.enqueue("Steak")
     queue.enqueue("Beer")
-    assert queue.first_item.data == "Beer"
+    assert queue.last_item.data == "Beer"
 
 
 def test_dequeue_empty():
@@ -34,7 +34,7 @@ def test_dequeue_multi():
     queue.enqueue("Bacon")
     queue.enqueue("Beer")
     assert queue.dequeue() == "Bacon"
-    assert queue.last_item.data == "Beer"
+    assert queue.first_item.data == "Beer"
     assert queue.size() == 1
 
 
