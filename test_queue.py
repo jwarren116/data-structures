@@ -1,15 +1,14 @@
-from queue import QueueItem
 from queue import Queue
 import pytest
 
 
-def test_enqueue():
+def test_enqueue_first_item():
     queue = Queue()
     queue.enqueue("Bacon")
     assert queue.last_item.data == "Bacon"
 
 
-def test_enqueue_multi():
+def test_enqueue_multi_last_item():
     queue = Queue()
     queue.enqueue("Bacon")
     queue.enqueue("Steak")
@@ -30,6 +29,7 @@ def test_dequeue_multi():
     queue.enqueue("Beer")
     assert queue.dequeue() == "Bacon"
     assert queue.last_item.data == "Beer"
+    assert queue.size() == 1
 
 
 def test_size():
