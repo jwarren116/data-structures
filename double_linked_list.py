@@ -68,6 +68,8 @@ class DoubleLinked(object):
                 else:
                     current_item = current_item.next_item
             if current_item.prev_item is None:
+                # current_item.next_item.prev_item = None
                 self.first_item = current_item.next_item
             else:
                 current_item.prev_item.next_item = current_item.next_item
+                current_item.next_item.prev_item = current_item.prev_item
