@@ -1,28 +1,47 @@
 
-from parenthetics import Parenthentic
+from parenthetics import is_balanced
 import pytest
 
 
 def test_isone():
-    text = Parenthentic()
-    assert text.isequal("(") == 1
+    assert is_balanced("(") == 1
 
 
 def test_isneg():
-    text = Parenthentic()
-    assert text.isequal(")") == -1
+    assert is_balanced(")") == -1
 
 
 def test_iszero():
-    text = Parenthentic()
-    assert text.isequal("( )") == 0
+    assert is_balanced("( )") == 0
 
 
 def test_withstring():
-    text = Parenthentic()
-    assert text.isequal("this is a (string) with open and close") == 0
+    assert is_balanced("this is a (string) with open and close") == 0
 
 
 def test_mismatched():
-    text = Parenthentic()
-    assert text.isequal("This is a string with )))))(((((( wrong order") == -1
+    assert is_balanced("This is a string with )))))(((((( wrong order") == -1
+
+
+def test_bug():
+    assert is_balanced("()(") == 1
+
+
+def test_greater_than_one():
+    assert is_balanced("(((") == 1
+
+
+def test_three():
+    assert is_balanced("(((this is some text)))some more text") == 0
+
+
+def test_three_unballanced():
+    assert is_balanced("(((text))))(") == -1
+
+
+def test_empty():
+    assert is_balanced("") == 0
+
+
+def test_no_paren():
+    assert is_balanced("this is text no parenthesis") == 0
