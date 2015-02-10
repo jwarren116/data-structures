@@ -16,6 +16,12 @@ def test_enqueue_multi_last_item():
     assert queue.first_item.data == "Beer"
 
 
+def test_dequeue_empty():
+    queue = Queue()
+    with pytest.raises(ValueError):
+        queue.dequeue()
+
+
 def test_dequeue():
     queue = Queue()
     queue.enqueue("Bacon")
