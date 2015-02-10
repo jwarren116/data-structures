@@ -31,3 +31,15 @@ class DoubleLinked(object):
             self.first_item = self.last_item = new_item
         else:
             self.last_item = self.last_item.next_item = new_item
+
+    def pop(self):
+        # pops first value from list and returns it
+        obsolete_item = self.first_item
+        if self.first_item is None:
+            raise ValueError("No items in list!")
+        elif self.last_item is obsolete_item:
+            self.first_item = self.last_item = None
+        else:
+            obsolete_item.next_item.prev_item = None
+            self.first_item = self.first_item.next_item
+        return obsolete_item.data
