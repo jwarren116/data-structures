@@ -59,7 +59,7 @@ class DoubleLinked(object):
     def remove(self, value):
         # remove value from list, wherever it might be
         if self.first_item is None:
-            raise ValueError("The list is empty")
+            raise AttributeError("The list is empty")
         else:
             current_item = self.first_item
             while current_item.val != value:
