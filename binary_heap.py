@@ -3,7 +3,7 @@
 
 class BinaryHeap(object):
     def __init__(self):
-        heap_list = []
+        self.heap_list = []
 
     def push(self, val):
         """puts a new value at the top of the heap, maintaining the heap property"""
