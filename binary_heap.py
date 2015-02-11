@@ -27,7 +27,16 @@ class BinaryHeap(object):
     def pop(self):
         """removes the 'top' value in the heap,
         maintaining the heap property"""
-        pass
+        end = len(self.heap_list) - 1
+        if end <= 0:
+            self.heap_list.pop()
+        pop_item = self.heap_list[0]
+        return_item = self.heap_list.pop()
+        position = 0
+        while True:
+            child_two_position = (position + 1) * 2
+            child_one_position = child_two_position - 1
+
 
     def swap(self, child, parent):
         pass
