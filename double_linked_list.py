@@ -19,7 +19,7 @@ class DoubleLinked(object):
     def insert(self, val):
         # adds val to beginning of list
         new_item = ListItem(val, next_item=self.first_item)
-        if not self.first_item:
+        if self.first_item is None:
             self.first_item = self.last_item = new_item
         else:
             self.first_item = self.first_item.prev_item = new_item
@@ -56,20 +56,19 @@ class DoubleLinked(object):
             self.last_item = self.last_item.prev_item
         return obsolete_item.val
 
-    def remove(self, val):
-        # remove val from list, wherever it might be
+    def remove(self, value):
+        # remove value from list, wherever it might be
         if self.first_item is None:
             raise ValueError("The list is empty")
         else:
             current_item = self.first_item
-            while current_item.val != val:
-                if current_item is None:
+            while current_item.val != value:
+                if current_item.next_item is None:
                     raise ValueError("Value not found in list")
                 else:
                     current_item = current_item.next_item
             if current_item.prev_item is None:
-                # current_item.next_item.prev_item = None
-                self.first_item = current_item.next_item
+                self.first_item = self.first_item.next_item
             else:
                 current_item.prev_item.next_item = current_item.next_item
                 current_item.next_item.prev_item = current_item.prev_item
