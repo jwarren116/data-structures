@@ -56,7 +56,7 @@ def test_shift_empty():
 
 def test_remove_empty():
     linked = DoubleLinked()
-    with pytest.raises(ValueError):
+    with pytest.raises(AttributeError):
         linked.remove("Bob")
 
 
@@ -64,14 +64,22 @@ def test_remove_one():
     linked = DoubleLinked()
     linked.insert("Bob")
     linked.remove("Bob")
-    with pytest.raises(ValueError):
+    with pytest.raises(AttributeError):
         linked.remove("Bob")
 
 
-def test_remove_multi():
+def test_remove_wrong():
     linked = DoubleLinked()
     linked.insert("Fred")
     linked.insert("Bob")
-    linked.remove("Bob")
+    linked.insert("Joe")
     with pytest.raises(ValueError):
-        linked.remove("Bob")
+        linked.remove("Sue")
+
+
+def test_multi():
+    linked = DoubleLinked()
+    linked.insert("Fred")
+    linked.insert("Bob")
+    linked.insert("Joe")
+    assert linked.first_item.val == "Joe"
