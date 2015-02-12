@@ -31,8 +31,8 @@ def test_dequeue():
 
 def test_dequeue_multi():
     queue = Queue()
-    queue.insert("Bacon", 5)
-    queue.insert("Beer", 1)
+    queue.insert("Bacon", 1)
+    queue.insert("Beer", 5)
     assert queue.pop() == "Bacon"
     assert queue.first_item.val == "Beer"
     assert queue.size() == 1
