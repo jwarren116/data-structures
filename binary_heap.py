@@ -27,6 +27,7 @@ class BinaryHeap(object):
     def pop(self):
         """removes the 'top' value in the heap,
         maintaining the heap property"""
+        """remove top, replace with bottom, then let it trickle down."""
         end_of_heap = len(self.heap_list) - 1
         if end_of_heap <= 0:
             self.heap_list.pop()
@@ -42,6 +43,5 @@ class BinaryHeap(object):
             if self.heap_list[child_two_position] > self.heap_list[child_one_position]:
                 item = self.heap_list[child_two_position]
                 position = child_two_position
-            
 
         return return_item
