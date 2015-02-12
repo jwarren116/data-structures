@@ -15,16 +15,15 @@ def test_1():
     assert len(bin_list.heap_list) == 3
 
 
-
-# def test_2():
-#     bin_list = BinaryHeap()
-#     bin_list.push(10)
-#     bin_list.push(9)
-#     bin_list.push(5)
-#     bin_list.push(7)
-#     bin_list.pop()
-#     bin_list.pop()
-#     assert bin_list.pop() == 9
+def test_2():
+    bin_list = BinaryHeap()
+    bin_list.push(10)
+    bin_list.push(9)
+    bin_list.push(5)
+    bin_list.push(7)
+    bin_list.pop()
+    bin_list.pop()
+    assert bin_list.pop() == 9
 
 
 # def test_3():
