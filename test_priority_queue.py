@@ -70,16 +70,16 @@ def test_pop_multi():
     queue.insert("lemons", 14)
     queue.insert("human", 1)
     queue.insert("pineapple", 7)
-    queue.pop()
-    queue.pop()
-    queue.pop()
+    assert queue.pop() == "human"
+    assert queue.pop() == "Pickles"
+    assert queue.pop() == "pineapple"
     assert queue.size() == 2
 
 
 def test_peek():
     queue = Queue()
-    queue.insert("Bacon", 2)
+    queue.insert("Bacon", 25)
     queue.insert("Eggs", 63)
     queue.insert("Fajitas", 67)
     queue.insert("Chicken", 5)
-    assert queue.peek() == "Bacon"
+    assert queue.peek() == "Chicken"
