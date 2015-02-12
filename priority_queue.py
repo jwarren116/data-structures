@@ -19,7 +19,7 @@ class Queue(object):
 
     def insert(self, val, priority):
         # adds val to last item of queue
-        new_item = QueueItem(val, self.priority, next_item=self.last_item)
+        new_item = QueueItem(val, priority, next_item=self.last_item)
         if not self.first_item:
             self.first_item = self.last_item = new_item
         else:
@@ -41,7 +41,9 @@ class Queue(object):
                 current_item = current_item.next_item
             else:
                 current_item = current_item.next_item
-
+        current_item.prev_item.next_item = current_item.next_item
+        current_item.next_item.prev_item = current_item.prev_item
+        return priority_item.val
         #     obsolete_item.prev_item.next_item = None
         #     self.first_item = self.first_item.prev_item
         # return obsolete_item.val
