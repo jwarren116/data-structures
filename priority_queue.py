@@ -2,7 +2,7 @@
 
 
 class QueueItem(object):
-    def __init__(self, val, prev_item=None, next_item=None, priority=None):
+    def __init__(self, val, priority=None, prev_item=None, next_item=None):
         self.val = val
         self.next_item = next_item
         self.prev_item = prev_item
@@ -17,23 +17,31 @@ class Queue(object):
         self.first_item = first_item
         self.last_item = last_item
 
-    def enqueue(self, val, priority):
+    def insert(self, val, priority):
         # adds val to last item of queue
-        new_item = QueueItem(val, next_item=self.last_item)
+        new_item = QueueItem(val, self.priority, next_item=self.last_item)
         if not self.first_item:
             self.first_item = self.last_item = new_item
         else:
             self.last_item.prev_item = new_item
             self.last_item = new_item
 
-    def dequeue(self):
+    def pop(self):
         # pops first value of highest priority from the queue and returns it
-        # obsolete_item = self.first_item
-        # if self.first_item is None:
-        #     raise ValueError("No items in queue!")
+        priority_item = self.first_item
+        current_item = self.first_item
+        if self.first_item is None:
+            raise ValueError("No items in queue!")
         # elif self.last_item is obsolete_item:
         #     self.first_item = self.last_item = None
-        # else:
+
+        while current_item is not None:
+            if priority_item.priority > current_item.next_item.priority:
+                priority_item = current_item.next_item
+                current_item = current_item.next_item
+            else:
+                current_item = current_item.next_item
+
         #     obsolete_item.prev_item.next_item = None
         #     self.first_item = self.first_item.prev_item
         # return obsolete_item.val
