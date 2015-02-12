@@ -16,6 +16,14 @@ def test_enqueue_multi_last_item():
     assert queue.last_item.val == "Beer"
 
 
+def test_insert_with_spaces():
+    queue = Queue()
+    queue.insert("Breakfast Foods", 32)
+    queue.insert("Water Bottles", 3)
+    queue.insert("Non awkward backrubs", 1)
+    assert queue.size() == 3
+
+
 def test_dequeue_empty():
     queue = Queue()
     with pytest.raises(ValueError):
@@ -40,7 +48,7 @@ def test_dequeue_multi():
 
 def test_size():
     queue = Queue()
-    queue.insert("Bacon", 5)
+    queue.insert("Bacon", 65)
     queue.insert("Beer", 2)
     assert queue.size() == 2
 
@@ -48,8 +56,30 @@ def test_size():
 def test_size_with_remove():
     queue = Queue()
     queue.insert("Bacon", 1)
-    queue.insert("Beer", 1)
+    queue.insert("Beer", 7)
     queue.insert("Cow", 5)
     queue.insert("Whiskey", 2)
     queue.pop()
     assert queue.size() == 3
+
+
+def test_pop_multi():
+    queue = Queue()
+    queue.insert("Pickles", 3)
+    queue.insert("Apples", 10)
+    queue.insert("lemons", 14)
+    queue.insert("human", 1)
+    queue.insert("pineapple", 7)
+    queue.pop()
+    queue.pop()
+    queue.pop()
+    assert queue.size() == 2
+
+
+def test_peek():
+    queue = Queue()
+    queue.insert("Bacon", 2)
+    queue.insert("Eggs", 63)
+    queue.insert("Fajitas", 67)
+    queue.insert("Chicken", 5)
+    assert queue.peek() == "Bacon"
