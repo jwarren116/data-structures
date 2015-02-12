@@ -18,6 +18,7 @@ class Queue(object):
         self.last_item = last_item
 
     def insert(self, val, priority):
+        """adds new item to end of queue"""
         # adds val to last item of queue
         new_item = QueueItem(val, priority, next_item=self.last_item)
         if not self.first_item:
@@ -27,23 +28,23 @@ class Queue(object):
             self.last_item = new_item
 
     def pop(self):
-        # poops first value of highest priority from the queue and returns it
+        """finds first highest priority item in queue, removes item and returns value"""
         if self.first_item is None:
             raise ValueError("No items in queue!")
+        # if only one item in queue, reassign first and last items to none
         priority_item = self.first_item
         if self.first_item == self.last_item:
             self.first_item = self.last_item = None
             return priority_item.val
+        # iterate through list to find highest priority item
         current_item = self.first_item.next_item
         while current_item is not None:
-            try:
-                if priority_item.priority > current_item.priority:
-                    priority_item = current_item
-                    current_item = current_item.next_item
-                else:
-                    current_item = current_item.next_item
-            except AttributeError:
-                break
+            if priority_item.priority > current_item.priority:
+                priority_item = current_item
+                current_item = current_item.next_item
+            else:
+                current_item = current_item.next_item
+        # reassign neighbors of item with highest priority being popped
         if priority_item == self.first_item:
             priority_item.prev_item.next_item = None
             self.first_item = priority_item.prev_item
@@ -56,10 +57,27 @@ class Queue(object):
         return priority_item.val
 
     def size(self):
-        # returns size of the queue, returns 0 if empty
+        """returns size of the queue"""
         size = 0
         current_item = self.last_item
         while current_item is not None:
             size += 1
             current_item = current_item.next_item
         return size
+
+    def peek(self):
+        """returns highest first highest priority item in queue"""
+        if self.first_item is None:
+            raise ValueError("No items in queue!")
+        if self.first_item == self.last_item:
+            return self.first_item.val
+        # iterate through list to find highest priority item
+        priority_item = self.first_item
+        current_item = self.first_item.next_item
+        while current_item is not None:
+            if priority_item.priority > current_item.priority:
+                priority_item = current_item
+                current_item = current_item.next_item
+            else:
+                current_item = current_item.next_item
+        return priority_item.val
