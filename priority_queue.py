@@ -20,11 +20,11 @@ class Queue(object):
     def insert(self, val, priority):
         """adds new item to end of queue"""
         # adds val to last item of queue
-        new_item = QueueItem(val, priority, next_item=self.last_item)
+        new_item = QueueItem(val, priority, prev_item=self.last_item)
         if not self.first_item:
             self.first_item = self.last_item = new_item
         else:
-            self.last_item.prev_item = new_item
+            self.last_item.next_item = new_item
             self.last_item = new_item
 
     def pop(self):
@@ -46,11 +46,11 @@ class Queue(object):
                 current_item = current_item.next_item
         # reassign neighbors of item with highest priority being popped
         if priority_item == self.first_item:
-            priority_item.prev_item.next_item = None
-            self.first_item = priority_item.prev_item
-        elif priority_item == self.last_item:
             priority_item.next_item.prev_item = None
-            self.last_item = priority_item.next_item
+            self.first_item = priority_item.next_item
+        elif priority_item == self.last_item:
+            priority_item.prev_item.next_item = None
+            self.last_item = priority_item.prev_item
         else:
             priority_item.prev_item.next_item = priority_item.next_item
             priority_item.next_item.prev_item = priority_item.prev_item
@@ -59,7 +59,7 @@ class Queue(object):
     def size(self):
         """returns size of the queue"""
         size = 0
-        current_item = self.last_item
+        current_item = self.first_item
         while current_item is not None:
             size += 1
             current_item = current_item.next_item
