@@ -83,3 +83,15 @@ def test_peek():
     queue.insert("Fajitas", 67)
     queue.insert("Chicken", 5)
     assert queue.peek() == "Chicken"
+
+
+def test_peek_2():
+    queue = Queue()
+    queue.insert("Cabbage", 5)
+    queue.insert("mayo", 88)
+    queue.insert("Slaw", 4)
+    queue.insert("Village People", 7)
+    queue.insert("Coffee", 1)
+    assert queue.peek() == "Coffee"
+    queue.pop()
+    assert queue.peek() == ("Slaw")
