@@ -31,17 +31,20 @@ class BinaryHeap(object):
         if end_of_heap <= 0:
             self.heap_list.pop()
         return_item = self.heap_list[0]
-        item = self.heap_list[0]
+        item = self.heap_list[end_of_heap]
         position = 0
-        while position < end_of_heap:
+        while True:
             child_two_position = (position + 1) * 2
             child_one_position = child_two_position - 1
+            
+
+
             if self.heap_list[child_one_position] >= self.heap_list[child_two_position]:
                 item = self.heap_list[child_one_position]
                 position = child_one_position
             if self.heap_list[child_two_position] > self.heap_list[child_one_position]:
                 item = self.heap_list[child_two_position]
                 position = child_two_position
-            
+
 
         return return_item
