@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+"""THIS FUNCTION IS NOT CURRENTLY WORKING"""
 
 class BinaryHeap(object):
     def __init__(self):
@@ -27,6 +28,7 @@ class BinaryHeap(object):
     def pop(self):
         """removes the 'top' value in the heap,
         maintaining the heap property"""
+        """remove top, replace with bottom, then let it trickle down."""
         end_of_heap = len(self.heap_list) - 1
         if end_of_heap <= 0:
             self.heap_list.pop()
@@ -36,8 +38,6 @@ class BinaryHeap(object):
         while True:
             child_two_position = (position + 1) * 2
             child_one_position = child_two_position - 1
-            
-
 
             if self.heap_list[child_one_position] >= self.heap_list[child_two_position]:
                 item = self.heap_list[child_one_position]
@@ -45,6 +45,5 @@ class BinaryHeap(object):
             if self.heap_list[child_two_position] > self.heap_list[child_one_position]:
                 item = self.heap_list[child_two_position]
                 position = child_two_position
-
 
         return return_item
