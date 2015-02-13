@@ -2,6 +2,29 @@ from bin_heap import BinaryHeap
 import pytest
 
 
+def all_items(heap):
+    items = []
+    while True:
+        try:
+            items.append(heap.pop())
+        except IndexError:
+            return items
+    return items
+
+
+def test_reverse_range():
+    heap = BinaryHeap()
+    for i in range(5, 0, -1):
+        heap.push(i)
+    assert all_items(heap) == range(1, 6)
+
+
+# def test_with_range():
+#     bh = BinaryHeap()
+#     bh.push(range_func)
+#     assert all_items(5) == range(0, 5)
+
+
 def test_0():
     bin_list = BinaryHeap()
     assert bin_list.heaplist == [0]
