@@ -36,7 +36,6 @@ class BinaryHeap(object):
                 self.heaplist[sc] = swappee
             val = sc
 
-# This func is broken
     def youngest(self, val):
         if val * 2 + 1 > self.currentsize:
             return val * 2
