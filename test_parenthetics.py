@@ -45,3 +45,11 @@ def test_empty():
 
 def test_no_paren():
     assert is_balanced("this is text no parenthesis") == 0
+
+
+def test_jumbled_up():
+    assert is_balanced("(()()))()") == -1
+
+
+def test_will_it_break():
+    assert is_balanced("()())(())(())(((") == -1
