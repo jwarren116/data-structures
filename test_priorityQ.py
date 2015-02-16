@@ -1,5 +1,5 @@
 import _priorityQ as pq
-# import sys
+import sys
 import pytest
 
 
@@ -10,12 +10,12 @@ class StackTest():
         assert type(queue) == pq.Priority
 
     def test_insert(self):
-        self.assertEqual(self.append.data)
+        self.assertEqual(self.append.item)
 
     def test_pop(self):
-        self.asserEqual(self.pop.data)
+        self.asserEqual(self.pop.item)
         self.assertEqual(self.length == 0)
 
     def test_peek(self):
-        self.asserEqual(self.append.data)
+        self.asserEqual(self.append.item)
         self.assertEqual(self.peek == 0)
