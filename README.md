@@ -12,7 +12,7 @@ We revisted our previous linked list to create a double linked list. Each node o
 
 Priority Queue is a queue that adds priority to the queue items. The idea is to give each value a number that designates is priority. After the queue is made, you can look at the highest priority item, which has the lowest number, via the peek method. The pop method will remove the item with the highest priority without disturbing the order integrety of the list.
 
-
+Binary Heap is a program that will build a tree of data, and prioritize it based on its value and the value of the 'child' notes below it. We used [interactivepython.org](http://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html) as a reference and to assist in implementing the heap. WARNING: The tests are quite inclusive and can take a little while to run, but prove that the program can handle a load.
 
 
 
