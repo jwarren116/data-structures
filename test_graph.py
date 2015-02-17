@@ -3,8 +3,11 @@ import pytest
 
 
 def test_add_nodes():
-    G = SimpleGraph()
-    G.add_node([A, B])
-    G.add_node([A, C])
-    G.add_node([B, D])
-    assert SimpleGraph() == ([A, B], [A, C], [B, D])
+    g = SimpleGraph()
+    {"a": ["d"],
+        "b": ["c"],
+        "c": ["b", "c", "d", "e"],
+        "d": ["a", "c"],
+        "e": ["c"],
+        "f": []}
+    assert g.node() == ['a', 'c', 'b', 'e', 'd', 'f']
