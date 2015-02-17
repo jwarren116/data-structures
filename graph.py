@@ -2,16 +2,16 @@
 class SimpleGraph(object):
     """This is a simple graph program that will allow us
     to impliment a graph data structure"""
-    def __init__(self, n):
-        self.n = n
+    def __init__(self, dict_graph={}):
+        self.dict_graph = dict_graph
 
-    def node():
+    def node(self):
         '''return a list of all nodes in the graph'''
-        pass
+        return list(__dict_graph.keys())
 
     def edges():
         '''return a list of all edges in the graph'''
-        pass
+        return list(add_edge())
 
     def add_node(self, n):
         '''adds a new node 'n' to the graph'''
