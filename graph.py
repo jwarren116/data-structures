@@ -15,14 +15,13 @@ class SimpleGraph(object):
 
     def add_node(self, n):
         '''adds a new node 'n' to the graph'''
-        pass
+        if n not in self.dict_graph:
+            self.dict_graph[n] = []
 
     def add_edge(self, n1, n2):
         '''adds a new edge to the graph connecting 'n1' and 'n2',
         if either n1 or n2 are not already present in the graph,
         they should be added.'''
-        edge = set(edge)
-        (n1, n2) = tuple(edge)
         if n1 in self.dict_graph:
             self.dict_graph[n1].append(n2)
         else:
@@ -31,21 +30,27 @@ class SimpleGraph(object):
     def del_node(self, n):
         '''deletes the node 'n' from the graph,
         raises an error if no such node exists'''
-        pass
+        try:
+            del self.dict_graph[n]
+        except KeyError:
+            raise ValueError('That node does not exist')
 
     def del_edge(self, n1, n2):
         '''deletes the edge connecting 'n1' and 'n2' from the graph,
         raises an error if no such edge exists'''
-        pass
+        try:
+            self.dict_graph[n1].remove(n2)
+        except ValueError:
+            raise ValueError('That edge does not exist')
 
     def has_node(self, n):
         '''True if node 'n' is contained in the graph, False if not.'''
-        pass
+        return n in self.dict_graph
 
     def neighbors(self, n):
         '''returns the list of all nodes connected to 'n' by edges,
-        raises an error if n is not in g'''
-        pass
+        raises an error if n is not in graph'''
+        
 
     def adjacent(self, n1, n2):
         '''returns True if there is an edge connecting n1 and n2, False if not,
