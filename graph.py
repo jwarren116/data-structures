@@ -21,7 +21,12 @@ class SimpleGraph(object):
         '''adds a new edge to the graph connecting 'n1' and 'n2',
         if either n1 or n2 are not already present in the graph,
         they should be added.'''
-        pass
+        edge = set(edge)
+        (n1, n2) = tuple(edge)
+        if n1 in self.dict_graph:
+            self.dict_graph[n1].append(n2)
+        else:
+            self.dict_graph[n1] == [n2]
 
     def del_node(self, n):
         '''deletes the node 'n' from the graph,
