@@ -50,9 +50,19 @@ class SimpleGraph(object):
     def neighbors(self, n):
         '''returns the list of all nodes connected to 'n' by edges,
         raises an error if n is not in graph'''
-        
+        neighbors = []
+        try:
+            for key in self.dict_graph.values():
+                if key[value] is n:
+                    neighbors.append(key)
+            return neighbors
+        except KeyError:
+            raise ValueError("There are no neighbors here")
 
     def adjacent(self, n1, n2):
         '''returns True if there is an edge connecting n1 and n2, False if not,
         raises an error if either of the supplied nodes are not in g'''
-        pass
+        try:
+            return n2 in self.dict_graph[n1]
+        except KeyError:
+            raise ValueError('That node is not in the graph')
