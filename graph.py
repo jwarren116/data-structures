@@ -50,8 +50,8 @@ class SimpleGraph(object):
         raises an error if no such edge exists'''
         try:
             self.dict_graph[n1].remove(n2)
-        except KeyError:
-            raise KeyError('That edge does not exist')
+        except ValueError:
+            raise ValueError('That edge does not exist')
 
     def has_node(self, n):
         '''True if node 'n' is contained in the graph, False if not.'''

@@ -29,10 +29,22 @@ def test_del_nodes():
     g.add_node('a')
 
 
+def test_del_error():
+    g = SimpleGraph(test_dict)
+    with pytest.raises(KeyError):
+        g.del_node('p')
+
+
 def test_del_edge():
     g = SimpleGraph(test_dict)
     g.del_edge('c', 'd')
     assert g.neighbors('c') == ['b', 'c', 'e']
+
+
+def test_edge_error():
+    g = SimpleGraph(test_dict)
+    with pytest.raises(ValueError):
+        g.del_edge('a', 'z')
 
 
 def test_add_edge():
@@ -51,6 +63,12 @@ def test_adjacent():
     g = SimpleGraph(test_dict)
     assert g.adjacent('a', 'd')
     assert not g.adjacent('a', 'f')
+
+
+def test_adjacent_error():
+    g = SimpleGraph(test_dict)
+    with pytest.raises(KeyError):
+        g.adjacent('l', 'm')
 
 
 def test_edges():
