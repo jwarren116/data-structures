@@ -79,5 +79,5 @@ def test_edges():
     g.add_edge('a', 'c')
     g.add_edge('a', 'b')
     assert g.has_node('a')
-    assert  'c' in g.node()
+    assert 'c' in g.node()
     assert g.edges() == '''b->[]  c->[]  a->['c', 'b']  '''
