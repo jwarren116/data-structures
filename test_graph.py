@@ -3,6 +3,7 @@ import pytest
 
 
 def test_add_nodes():
+    """nodes are added"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -15,6 +16,7 @@ def test_add_nodes():
 
 
 def test_del_nodes():
+    """nodes are deleted"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -28,6 +30,7 @@ def test_del_nodes():
 
 
 def test_del_error():
+    """error raised when non-existant value deleted"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -39,6 +42,7 @@ def test_del_error():
 
 
 def test_del_edge():
+    """other edges preserved when one deleted"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -50,6 +54,7 @@ def test_del_edge():
 
 
 def test_edge_error():
+    """delete non-existant edge"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -61,6 +66,7 @@ def test_edge_error():
 
 
 def test_add_edge():
+    """edge added, new node added"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -73,6 +79,7 @@ def test_add_edge():
 
 
 def test_has_node():
+    """edge added, new node added"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -83,6 +90,7 @@ def test_has_node():
 
 
 def test_adjacent():
+    """adjacent correctly identify edges, new edge add node"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -95,6 +103,7 @@ def test_adjacent():
 
 
 def test_adjacent_error():
+    """error raised when nodes non-existant"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
@@ -106,6 +115,7 @@ def test_adjacent_error():
 
 
 def test_edges():
+    """edges prints correct edges as tuples"""
     g = SimpleGraph()
     g.add_node('a')
     g.add_node('b')
