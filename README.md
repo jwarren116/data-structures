@@ -10,5 +10,12 @@ We implemented a queue where an item is added into the queue and--contrary to a 
 
 We revisted our previous linked list to create a double linked list. Each node of the list points at the next and previous items. The list has pointers for the first and last item of the list.
 
+Priority Queue is a queue that adds priority to the queue items. The idea is to give each value a number that designates is priority. After the queue is made, you can look at the highest priority item, which has the lowest number, via the peek method. The pop method will remove the item with the highest priority without disturbing the order integrety of the list.
+
+Binary Heap is a program that will build a tree of data, and prioritize it based on its value and the value of the 'child' notes below it. We used [interactivepython.org](http://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html) as a reference and to assist in implementing the heap. WARNING: The tests are quite inclusive and can take a little while to run, but prove that the program can handle a load.
+
+
+We have included a basic graph data structure. Our graph is capable of adding vertices/nodes, adding edges between nodes, deleting nodes and edges, reporting all connected nodes, and reporting nodes connected to it. As an inspiration, we used [this educational site](http://www.python-course.eu/graphs_python.php).
+
 
 This repository is a collaboration between Jake Anderson and James Warren while attending the Code Fellows Python Development Accelerator in Winter 2015.
