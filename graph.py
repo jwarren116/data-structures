@@ -60,3 +60,13 @@ class SimpleGraph(object):
             return True
         else:
             return False
+
+    def depth_first_traversal(self, start):
+        pass
+
+    def breadth_first_traversal(self, start):
+        pass
+
+
+if __name__ == '__main__':
+    pass
