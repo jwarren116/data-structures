@@ -61,12 +61,25 @@ class SimpleGraph(object):
         else:
             return False
 
-    def depth_first_traversal(self, start):
-        pass
-
     def breadth_first_traversal(self, start):
+        visited = set()
+        stack = [start]
+        while stack:
+            vertex = stack.pop()
+            if vertex not in visited:
+                visited.add(vertex)
+                stack.extend(self.dict_graph[vertex])
+        return visited
+
+    def depth_first_traversal(self, start):
         pass
 
 
 if __name__ == '__main__':
-    pass
+    g = SimpleGraph()
+    g.add_edge('a', 'b')
+    g.add_edge('a', 'c')
+    g.add_edge('b', 'd')
+    g.add_edge('b', 'e')
+    g.add_edge('e', 'f')
+    print g.depth_first_traversal('a')
