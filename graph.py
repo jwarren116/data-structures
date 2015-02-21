@@ -71,8 +71,13 @@ class SimpleGraph(object):
                 stack.extend(self.dict_graph[vertex])
         return visited
 
-    def depth_first_traversal(self, start):
-        pass
+    def depth_first_traversal(self, start, visited=None):
+        if visited is None:
+            visited = set()
+        visited.add(start)
+        for next in self.dict_graph[start]:
+            self.depth_first_traversal(next, visited)
+        return visited
 
 
 if __name__ == '__main__':
@@ -82,4 +87,5 @@ if __name__ == '__main__':
     g.add_edge('b', 'd')
     g.add_edge('b', 'e')
     g.add_edge('e', 'f')
+    g.add_edge('f', 'g')
     print g.depth_first_traversal('a')
