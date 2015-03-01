@@ -124,3 +124,69 @@ def test_edges():
     g.add_edge('a', 'b')
     assert ('a', 'c') in g.edges()
     assert ('a', 'b') in g.edges()
+
+
+def test_breadth():
+    g = SimpleGraph()
+    g.add_edge('a', 'b')
+    g.add_edge('a', 'c')
+    g.add_edge('b', 'd')
+    g.add_edge('b', 'e')
+    g.add_edge('e', 'f')
+    g.add_edge('f', 'g')
+    assert g.breadth_first_traversal('a') == ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+
+
+def test_depth():
+    g = SimpleGraph()
+    g.add_edge('a', 'b')
+    g.add_edge('a', 'c')
+    g.add_edge('b', 'd')
+    g.add_edge('b', 'e')
+    g.add_edge('e', 'f')
+    g.add_edge('f', 'g')
+    assert g.depth_first_traversal('a') == ['a', 'b', 'd', 'e', 'f', 'g', 'c']
+
+
+def test_one_breadth():
+    g = SimpleGraph()
+    g.add_node('a')
+    assert g.breadth_first_traversal('a') == ['a']
+
+
+def test_one_depth():
+    g = SimpleGraph()
+    g.add_node('a')
+    assert g.depth_first_traversal('a') == ['a']
+
+
+def test_one_loop_breadth():
+    g = SimpleGraph()
+    g.add_edge('a', 'a')
+    assert g.breadth_first_traversal('a') == ['a']
+
+
+def test_one_loop_depth():
+    g = SimpleGraph()
+    g.add_edge('a', 'a')
+    assert g.depth_first_traversal('a') == ['a']
+
+
+def fully_connected_graph(nodes):
+    g = SimpleGraph()
+    for node in nodes:
+        g.add_node(node)
+        for other_node in nodes:
+            if other_node is not node:
+                g.add_edge(node, other_node)
+    return g
+
+
+def test_fully_connected():
+    g = fully_connected_graph(['a', 'b', 'c', 'd'])
+    assert g.breadth_first_traversal('a') == ['a', 'b', 'c', 'd']
+
+
+def test_fully_connected_again():
+    g = fully_connected_graph(['a', 'b', 'c', 'd'])
+    assert g.depth_first_traversal('a') == ['a', 'b', 'c', 'd']
