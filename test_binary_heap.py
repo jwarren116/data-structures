@@ -43,10 +43,3 @@ def test_random_input():
     for i in random.sample(range(100), 100):
         h.push(i)
     assert all_items(h) == range(0, 100)
-
-
-def test_really_really_big_random_input():
-    h = BinaryHeap()
-    for i in random.sample(range(1000000), 1000000):
-        h.push(i)
-    assert all_items(h) == range(0, 1000000)
