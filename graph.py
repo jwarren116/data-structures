@@ -19,7 +19,7 @@ class SimpleGraph(object):
 
     def add_node(self, n):
         '''adds a new node 'n' to the graph'''
-        self.dict_graph.setdefault(n, [])
+        self.dict_graph.setdefault(n, {})
 
     def add_edge(self, n1, n2, weight=0):
         '''adds a new edge to the graph connecting 'n1' and 'n2',
@@ -37,7 +37,7 @@ class SimpleGraph(object):
         del self.dict_graph[n]
         for value in self.dict_graph.items():
             if n in value:
-                value.remove(n)
+                del self.dict_graph[value][n]
 
     def del_edge(self, n1, n2):
         '''deletes the edge connecting 'n1' and 'n2' from the graph,
