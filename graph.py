@@ -60,3 +60,42 @@ class SimpleGraph(object):
             return True
         else:
             return False
+
+    def breadth_first_traversal(self, start):
+        visited = set()
+        queue = [start]
+        return_value = []
+        while queue:
+            node = queue.pop(0)
+            if node not in visited:
+                visited.add(node)
+                return_value.append(node)
+                queue.extend(self.dict_graph[node])
+        return return_value
+
+    def _depth_first_visitor(self, node, visited, return_value):
+        if node in visited:
+            return
+
+        visited.add(node)
+        return_value.append(node)
+        for child_node in self.dict_graph[node]:
+            self._depth_first_visitor(child_node, visited, return_value)
+
+    def depth_first_traversal(self, start, visited=None):
+        return_value = []
+        self._depth_first_visitor(start, set(), return_value)
+        return return_value
+
+
+if __name__ == '__main__':
+    g = SimpleGraph()
+    g.add_edge('a', 'b')
+    g.add_edge('a', 'c')
+    g.add_edge('b', 'd')
+    g.add_edge('b', 'e')
+    g.add_edge('e', 'f')
+    g.add_edge('f', 'g')
+    # g.add_edge('g', 'a')
+    print g.breadth_first_traversal('a')
+    print g.depth_first_traversal('b')
