@@ -21,15 +21,15 @@ class SimpleGraph(object):
         '''adds a new node 'n' to the graph'''
         self.dict_graph.setdefault(n, [])
 
-    def add_edge(self, n1, n2):
+    def add_edge(self, n1, n2, weight=0):
         '''adds a new edge to the graph connecting 'n1' and 'n2',
         if either n1 or n2 are not already present in the graph,
         they should be added.'''
-        self.dict_graph.setdefault(n2, [])
+        self.dict_graph.setdefault(n2, {})
         if n1 in self.dict_graph:
-            self.dict_graph[n1].append(n2)
+            self.dict_graph[n1][n2] = weight
         else:
-            self.dict_graph[n1] = [n2]
+            self.dict_graph[n1] = {n2: weight}
 
     def del_node(self, n):
         '''deletes the node 'n' from the graph,
@@ -42,7 +42,7 @@ class SimpleGraph(object):
     def del_edge(self, n1, n2):
         '''deletes the edge connecting 'n1' and 'n2' from the graph,
         raises an error if no such edge exists'''
-        self.dict_graph[n1].remove(n2)
+        del self.dict_graph[n1][n2]
 
     def has_node(self, n):
         '''True if node 'n' is contained in the graph, False if not.'''
