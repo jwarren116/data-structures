@@ -35,9 +35,9 @@ class SimpleGraph(object):
         '''deletes the node 'n' from the graph,
         raises an error if no such node exists'''
         del self.dict_graph[n]
-        for value in self.dict_graph.items():
+        for key, value in self.dict_graph.items():
             if n in value:
-                del self.dict_graph[value][n]
+                del value[n]
 
     def del_edge(self, n1, n2):
         '''deletes the edge connecting 'n1' and 'n2' from the graph,
@@ -86,16 +86,3 @@ class SimpleGraph(object):
         return_value = []
         self._depth_first_visitor(start, set(), return_value)
         return return_value
-
-
-if __name__ == '__main__':
-    g = SimpleGraph()
-    g.add_edge('a', 'b')
-    g.add_edge('a', 'c')
-    g.add_edge('b', 'd')
-    g.add_edge('b', 'e')
-    g.add_edge('e', 'f')
-    g.add_edge('f', 'g')
-    # g.add_edge('g', 'a')
-    print g.breadth_first_traversal('a')
-    print g.depth_first_traversal('b')
