@@ -50,7 +50,7 @@ def test_del_edge():
     g.add_edge('a', 'c')
     g.add_edge('a', 'b')
     g.del_edge('a', 'c')
-    assert g.neighbors('a') == ['b']
+    assert g.neighbors('a') == {'b': 0}
 
 
 def test_edge_error():
@@ -61,7 +61,7 @@ def test_edge_error():
     g.add_node('c')
     g.add_edge('a', 'c')
     g.add_edge('a', 'b')
-    with pytest.raises(ValueError):
+    with pytest.raises(KeyError):
         g.del_edge('a', 'z')
 
 
@@ -75,7 +75,7 @@ def test_add_edge():
     g.add_edge('a', 'b')
     g.add_edge('q', 'a')
     assert g.has_node('q')
-    assert g.neighbors('q') == ['a']
+    assert g.neighbors('q') == {'a': 0}
 
 
 def test_has_node():
@@ -134,7 +134,7 @@ def test_breadth():
     g.add_edge('b', 'e')
     g.add_edge('e', 'f')
     g.add_edge('f', 'g')
-    assert g.breadth_first_traversal('a') == ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+    assert g.breadth_first_traversal('a') == ['a', 'c', 'b', 'e', 'd', 'f', 'g']
 
 
 def test_depth():
@@ -145,7 +145,7 @@ def test_depth():
     g.add_edge('b', 'e')
     g.add_edge('e', 'f')
     g.add_edge('f', 'g')
-    assert g.depth_first_traversal('a') == ['a', 'b', 'd', 'e', 'f', 'g', 'c']
+    assert g.depth_first_traversal('a') == ['a', 'c', 'b', 'e', 'f', 'g', 'd']
 
 
 def test_one_breadth():
@@ -184,9 +184,33 @@ def fully_connected_graph(nodes):
 
 def test_fully_connected():
     g = fully_connected_graph(['a', 'b', 'c', 'd'])
-    assert g.breadth_first_traversal('a') == ['a', 'b', 'c', 'd']
+    assert g.breadth_first_traversal('a') == ['a', 'c', 'b', 'd']
 
 
 def test_fully_connected_again():
     g = fully_connected_graph(['a', 'b', 'c', 'd'])
-    assert g.depth_first_traversal('a') == ['a', 'b', 'c', 'd']
+    assert g.depth_first_traversal('a') == ['a', 'c', 'b', 'd']
+
+
+def test_weighted_edges():
+    g = SimpleGraph()
+    g.add_edge('a', 'b', 5)
+    g.add_edge('a', 'c', 2)
+    g.add_edge('b', 'c', 1)
+    assert g.dict_graph['a'] == {'b': 5, 'c': 2}
+
+
+def test_weighted_edges_with_edge_delete():
+    g = SimpleGraph()
+    g.add_edge('a', 'b', 5)
+    g.add_edge('a', 'c', 2)
+    g.del_edge('a', 'c')
+    assert g.dict_graph['a'] == {'b': 5}
+
+
+def test_weighted_edges_with_node_delete():
+    g = SimpleGraph()
+    g.add_edge('a', 'b', 5)
+    g.add_edge('a', 'c', 2)
+    g.del_node('c')
+    assert g.dict_graph['a'] == {'b': 5}

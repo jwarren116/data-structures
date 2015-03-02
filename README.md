@@ -14,10 +14,11 @@ Priority Queue is a queue that adds priority to the queue items. The idea is to 
 
 Binary Heap is a program that will build a tree of data, and prioritize it based on its value and the value of the 'child' notes below it. We used [interactivepython.org](http://interactivepython.org/runestone/static/pythonds/Trees/BinaryHeapImplementation.html) as a reference and to assist in implementing the heap. WARNING: The tests are quite inclusive and can take a little while to run, but prove that the program can handle a load.
 
-
 We have included a basic graph data structure. Our graph is capable of adding vertices/nodes, adding edges between nodes, deleting nodes and edges, reporting all connected nodes, and reporting nodes connected to it. As an inspiration, we used [this educational site](http://www.python-course.eu/graphs_python.php).
 
 We added a graph that includes traversal. Our graph can do both depth first, and breadth first traversal. We used [the same site](http://www.python-course.eu/graphs_python.php) that assisted in our understanding and constructing of our simple graph, as well as the Fundamentals of Python Data Structures book by Kenneth A Lambert.
+
+We have added weighted edges to our graph. Our edges() function does not return weights. Weights can be viewed in the dictionary containing the nodes and edges.
 
 
 This repository is a collaboration between Jake Anderson and James Warren while attending the Code Fellows Python Development Accelerator in Winter 2015.
