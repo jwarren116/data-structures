@@ -86,3 +86,6 @@ class SimpleGraph(object):
         return_value = []
         self._depth_first_visitor(start, set(), return_value)
         return return_value
+
+    def dijkstra(self, start, destination):
+        pass
