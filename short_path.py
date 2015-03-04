@@ -3,50 +3,52 @@ import sys
 # from graph import add_edges
 
 
-def dijkstra(self, start, finish):
-    distances = {}
-    previous = {}
-    nodes = []
+def dijkstra(graph, src, dest, visited=[], distances={}, predecessors={}):
 
-    for edge in self.vertices:
-        if edge == start:
-            distances[edge] = 0
-            heapq.heappush(nodes, [0, edge])
-        else:
-            distances[edge] = sys.maxint
-            heapq.heappush(nodes, [sys.maxint, edge])
-        previous[edge] = None
+    if src not in graph:
+        raise TypeError('the root of the shortest path tree cannot be found in the graph')
+        if dest not in graph:
+            raise TypeError('the target of the shortest path cannot be found in the graph')
+    # ending condition
+    if src == dest:
+        # We build the shortest path and display it
+        path = []
+        pred = dest
+        while pred is not None:
+            path.append(pred)
+            pred = predecessors.get(pred, None)
+        if pred is None:
+            print path, distances[dest]
+    else:
+        if not visited:
+            distances[src] = 0
+        # visit the neighbors
+        for neighbor in graph[src]:
+            if neighbor not in visited:
+                new_distance = distances[src] + graph[src][neighbor]
+                if new_distance < distances.get(neighbor, float('inf')):
+                    distances[neighbor] = new_distance
+                    predecessors[neighbor] = src
+        # mark as visited
+        visited.append(src)
+        # now that all neighbors have been visited: recurse
+        # select the non visited node with lowest distance 'x'
+        # run Dijskstra with src='x'
+        unvisited = {}
+        for k in graph:
+            if k not in visited:
+                unvisited[k] = distances.get(k, float('inf'))
+                x = min(unvisited, key=unvisited.get)
+                dijkstra(graph, x, dest, visited, distances, predecessors)
 
-    while nodes:
-        smallest = heapq.heappop(nodes)[1]
-        if smallest == finish:
-            path = []
-            while previous[smallest]:
-                path.append(smallest)
-                smallest = previous[smallest]
-            return path
-        if distances[smallest] == sys.maxint:
-            break
 
-        for neighbor in self.vertices[smallest]:
-            alt = distances[smallest] + self.vertices[smallest][neighbor]
-            if alt < distances[neighbor]:
-                distances[neighbor] = alt
-                previous[neighbor] = smallest
-                for n in nodes:
-                    if n[1] == neighbor:
-                        n[0] = alt
-                        break
-                heapq.heapify(nodes)
-    print distances
-
-# g = Dijkstra()
-# g.add_edge('A', {'B': 7, 'C': 8})
-# g.add_edge('B', {'A': 7, 'F': 2})
-# g.add_edge('C', {'A': 8, 'F': 6, 'G': 4})
-# g.add_edge('D', {'F': 8})
-# g.add_edge('E', {'H': 1})
-# g.add_edge('F', {'B': 2, 'C': 6, 'D': 8, 'G': 9, 'H': 3})
-# g.add_edge('G', {'C': 4, 'F': 9})
-# g.add_edge('H', {'E': 1, 'F': 3})
-# print g.shortest_path('A', 'H')
+if __name__ == "__main__":
+    # import sys;sys.argv = ['', 'Test.testName']
+    # unittest.main()
+    graph = {'s': {'a': 2, 'b': 1},
+             'a': {'s': 3, 'b': 4, 'c': 8},
+             'b': {'s': 4, 'a': 2, 'd': 2},
+             'c': {'a': 2, 'd': 7, 't': 4},
+             'd': {'b': 1, 'c': 11, 't': 5},
+             't': {'c': 3, 'd': 5}}
+    dijkstra(graph, 's', 't')
