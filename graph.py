@@ -115,7 +115,6 @@ def dijkstra(self, start, finish):
             return path
         if distances[smallest] == sys.maxint:
             break
-
         for neighbor in self.vertices[smallest]:
             alt = distances[smallest] + self.vertices[smallest][neighbor]
             if alt < distances[neighbor]:
