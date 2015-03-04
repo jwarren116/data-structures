@@ -214,3 +214,14 @@ def test_weighted_edges_with_node_delete():
     g.add_edge('a', 'c', 2)
     g.del_node('c')
     assert g.dict_graph['a'] == {'b': 5}
+
+
+def test_dijkstra():
+    g = SimpleGraph()
+    g.add_edge('a', 'b', 5)
+    g.add_edge('a', 'c', 3)
+    g.add_edge('b', 'd', 6)
+    g.add_edge('b', 'e', 2)
+    g.add_edge('e', 'f', 6)
+    g.add_edge('f', 'g', 8)
+    assert g.dict_graph.dijkstra['a', 'g'] == ['H', 'F', 'B']
