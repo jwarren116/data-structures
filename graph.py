@@ -1,5 +1,3 @@
-import heapq
-import sys
 
 
 class SimpleGraph(object):
