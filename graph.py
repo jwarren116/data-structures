@@ -91,38 +91,36 @@ class SimpleGraph(object):
         return return_value
 
 
-def dijkstra(self, start, finish):
-    distances = {}
-    previous = {}
-    nodes = []
+def dijkstra(graph, src, dest):
+    unvisited = {node: float('inf') for node in nodes}
+    visited = {}
+    current = src
+    current_distance = 0
+    unvisited[current] = current_distance
 
-    for edge in self.vertices:
-        if edge == start:
-            distances[edge] = 0
-            heapq.heappush(nodes, [0, edge])
-        else:
-            distances[edge] = sys.maxint
-            heapq.heappush(nodes, [sys.maxint, edge])
-        previous[edge] = None
+    while True:
+        for neighbor, distance in graph[current].items():
+            if neighbor not in unvisited:
+                continue
+            new_distance = current_distance + distance
+            if unvisited[neighbor] is float('inf') or unvisited[neighbor] > new_distance:
+                unvisited[neighbor] = new_distance
+        visited[current] = current_distance
+        del unvisited[current]
+        candidates = [node for node in unvisited.items() if node[1]]
+        current, current_distance = sorted(candidates, key=lambda x: x[1])[0]
+    print(visited)
 
-    while nodes:
-        smallest = heapq.heappop(nodes)[1]
-        if smallest == finish:
-            path = []
-            while previous[smallest]:
-                path.append(smallest)
-                smallest = previous[smallest]
-            return path
-        if distances[smallest] == sys.maxint:
-            break
-        for neighbor in self.vertices[smallest]:
-            alt = distances[smallest] + self.vertices[smallest][neighbor]
-            if alt < distances[neighbor]:
-                distances[neighbor] = alt
-                previous[neighbor] = smallest
-                for n in nodes:
-                    if n[1] == neighbor:
-                        n[0] = alt
-                        break
-                heapq.heapify(nodes)
-    print distances
+
+if __name__ == '__main__':
+    nodes = ('A', 'B', 'C', 'D', 'E', 'F', 'G')
+    graph = {
+        'B': {'A': 5, 'D': 1, 'G': 2},
+        'A': {'B': 5, 'D': 3, 'E': 12, 'F': 5},
+        'D': {'B': 1, 'G': 1, 'E': 1, 'A': 3},
+        'G': {'B': 2, 'D': 1, 'C': 2},
+        'C': {'G': 2, 'E': 1, 'F': 16},
+        'E': {'A': 12, 'D': 1, 'C': 1, 'F': 2},
+        'F': {'A': 5, 'E': 2, 'C': 16}
+    }
+    print dijkstra(graph, 'A', 'G')
