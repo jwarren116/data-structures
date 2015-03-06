@@ -20,11 +20,9 @@ def dijkstra(graph, src, dest):
                 unvisited[neighbor] = new_distance
         visited[current] = current_distance
         del unvisited[current]
-        if not unvisited:
-            break
         candidates = [node for node in unvisited.items() if node[1]]
         current, current_distance = sorted(candidates, key=lambda x: x[1])[0]
-    print(current_distance)
+    print(visited)
 
 
 if __name__ == '__main__':
