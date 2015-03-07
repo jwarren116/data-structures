@@ -1,4 +1,5 @@
-from bin_heap import BinaryHeap as heap
+import heapq
+import pdb
 
 
 class SimpleGraph(object):
@@ -6,9 +7,12 @@ class SimpleGraph(object):
                 to impliment a graph data structure'''
     def __init__(self, edges=None):
         self.dict_graph = {}
+        if edges is not None:
+            for source, target, cost in edges:
+                self.connect(source, target, cost)
 
     def nodes(self):
-        '''return a list of all nodes in the graph'''
+        '''return a iterator through of all nodes in the graph'''
         return self.dict_graph.iterkeys()
 
     def edges(self):
@@ -32,6 +36,10 @@ class SimpleGraph(object):
             self.dict_graph[n1][n2] = weight
         else:
             self.dict_graph[n1] = {n2: weight}
+
+    def cost(self, n1, n2):
+        'Return the cost to go from source to target directly.'
+        return self.dict_graph[n1][n2]
 
     def del_node(self, n):
         '''deletes the node 'n' from the graph,
@@ -63,6 +71,18 @@ class SimpleGraph(object):
         else:
             return False
 
+    def connect(self, n1, n2, cost=1):
+            'Connect n1 to target with the provided cost.'
+            if n1 not in self.dict_graph:
+                self.dict_graph[n1] = {}
+            if n2 not in self.dict_graph:
+                self.dict_graph[n2] = {}
+            self.dict_graph[n1][n2] = cost
+
+    def connected(self, n1):
+        'Return an iterator through the nodes connected to source.'
+        return self.dict_graph[n1].iterkeys()
+
     def breadth_first_traversal(self, start):
         visited = set()
         queue = [start]
@@ -89,29 +109,28 @@ class SimpleGraph(object):
         self._depth_first_visitor(start, set(), return_value)
         return return_value
 
+    def dijkstra(self, n1):
+        '''Using a binary heap to traverse the graph'''
+        binheap = [(0, n1)]
 
-def dijkstra(self, start):
-    '''Using a binary heap to traverse the graph'''
-    binheap = [(0, start)]
+        '''using a dict comprehension to go through the nodes.
+           assuming that an unvisited node is an infinitive
+           value untill I can prove otherwise'''
+        costs = {node: float('inf') for node in self.nodes()}
+        costs[n1] = 0
 
-    '''using a dict comprehension to go through the nodes.
-       assuming that an unvisited node is an infinitive
-       value untill I can prove otherwise'''
-    costs = {node: float('inf') for node in self.nodes()}
-    costs[start] = 0
+        while binheap:
+            cost, node = heapq.heappop(binheap)
 
-    while binheap:
-        cost, node = heap.pop(binheap)
+            for child_node in self.connected(n1):
+                new_cost = costs[node] + self.cost(node, child_node)
+                if costs[child_node] > new_cost:
+                    costs[child_node] = new_cost
+                    heapq.heappush(binheap, (new_cost, child_node))
 
-        for child in self.connected(node):
-            new_cost = costs[node] + self.cost(node, child)
-            if costs[child] > new_cost:
-                costs[child] = new_cost
-                heap.push(binheap, (new_cost, child))
-
-    return costs
+        return costs
 
 
 if __name__ == '__main__':
     graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('a', 'g', 1), ('g', 'b', 1)])
-    print dijkstra('a', 'g')
+    print graph.dijkstra('a')
