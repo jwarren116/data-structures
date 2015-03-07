@@ -1,3 +1,4 @@
+from bin_heap import BinaryHeap
 
 
 class SimpleGraph(object):
@@ -90,24 +91,8 @@ class SimpleGraph(object):
 
 
 def dijkstra(graph, src, dest):
-    unvisited = {node: float('inf') for node in nodes}
-    visited = {}
-    current = src
-    current_distance = 0
-    unvisited[current] = current_distance
-
-    while True:
-        for neighbor, distance in graph[current].items():
-            if neighbor not in unvisited:
-                continue
-            new_distance = current_distance + distance
-            if unvisited[neighbor] is float('inf') or unvisited[neighbor] > new_distance:
-                unvisited[neighbor] = new_distance
-        visited[current] = current_distance
-        del unvisited[current]
-        candidates = [node for node in unvisited.items() if node[1]]
-        current, current_distance = sorted(candidates, key=lambda x: x[1])[0]
-    print(visited)
+    pass
+    
 
 
 if __name__ == '__main__':
