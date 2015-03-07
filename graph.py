@@ -1,15 +1,15 @@
-from bin_heap import BinaryHeap
+from bin_heap import BinaryHeap as heap
 
 
 class SimpleGraph(object):
     '''This is a simple graph program that will allow us
                 to impliment a graph data structure'''
-    def __init__(self):
+    def __init__(self, edges=None):
         self.dict_graph = {}
 
     def nodes(self):
         '''return a list of all nodes in the graph'''
-        return self.dict_graph.keys()
+        return self.dict_graph.iterkeys()
 
     def edges(self):
         '''return a list of all edges in the graph'''
@@ -90,20 +90,28 @@ class SimpleGraph(object):
         return return_value
 
 
-def dijkstra(graph, src, dest):
-    pass
-    
+def dijkstra(self, start):
+    '''Using a binary heap to traverse the graph'''
+    binheap = [(0, start)]
+
+    '''using a dict comprehension to go through the nodes.
+       assuming that an unvisited node is an infinitive
+       value untill I can prove otherwise'''
+    costs = {node: float('inf') for node in self.nodes()}
+    costs[start] = 0
+
+    while binheap:
+        cost, node = heap.pop(binheap)
+
+        for child in self.connected(node):
+            new_cost = costs[node] + self.cost(node, child)
+            if costs[child] > new_cost:
+                costs[child] = new_cost
+                heap.push(binheap, (new_cost, child))
+
+    return costs
 
 
 if __name__ == '__main__':
-    nodes = ('A', 'B', 'C', 'D', 'E', 'F', 'G')
-    graph = {
-        'B': {'A': 5, 'D': 1, 'G': 2},
-        'A': {'B': 5, 'D': 3, 'E': 12, 'F': 5},
-        'D': {'B': 1, 'G': 1, 'E': 1, 'A': 3},
-        'G': {'B': 2, 'D': 1, 'C': 2},
-        'C': {'G': 2, 'E': 1, 'F': 16},
-        'E': {'A': 12, 'D': 1, 'C': 1, 'F': 2},
-        'F': {'A': 5, 'E': 2, 'C': 16}
-    }
-    print dijkstra(graph, 'A', 'G')
+    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('a', 'g', 1), ('g', 'b', 1)])
+    print dijkstra('a', 'g')
