@@ -1,13 +1,18 @@
+import heapq
+
 
 class SimpleGraph(object):
     '''This is a simple graph program that will allow us
                 to impliment a graph data structure'''
-    def __init__(self):
+    def __init__(self, edges=None):
         self.dict_graph = {}
+        if edges is not None:
+            for source, target, cost in edges:
+                self.connect(source, target, cost)
 
     def nodes(self):
-        '''return a list of all nodes in the graph'''
-        return self.dict_graph.keys()
+        '''return a iterator through of all nodes in the graph'''
+        return self.dict_graph.iterkeys()
 
     def edges(self):
         '''return a list of all edges in the graph'''
@@ -30,6 +35,10 @@ class SimpleGraph(object):
             self.dict_graph[n1][n2] = weight
         else:
             self.dict_graph[n1] = {n2: weight}
+
+    def cost(self, n1, n2):
+        '''Return the cost to go from source to target directly.'''
+        return self.dict_graph[n1][n2]
 
     def del_node(self, n):
         '''deletes the node 'n' from the graph,
@@ -61,6 +70,18 @@ class SimpleGraph(object):
         else:
             return False
 
+    def connect(self, n1, n2, cost=1):
+        '''Connect n1 to target with the provided cost.'''
+        if n1 not in self.dict_graph:
+            self.dict_graph[n1] = {}
+        if n2 not in self.dict_graph:
+            self.dict_graph[n2] = {}
+        self.dict_graph[n1][n2] = cost
+
+    def connected(self, n1):
+        '''Return an iterator through the nodes connected to source.'''
+        return self.dict_graph[n1].iterkeys()
+
     def breadth_first_traversal(self, start):
         visited = set()
         queue = [start]
@@ -86,3 +107,55 @@ class SimpleGraph(object):
         return_value = []
         self._depth_first_visitor(start, set(), return_value)
         return return_value
+
+    def dijkstra(self, n1):
+        '''Using a binary heap to traverse the graph'''
+        binheap = [(0, n1)]
+
+        '''using a dict comprehension to go through the nodes.
+           assuming that an unvisited node is an infinitive
+           value untill I can prove otherwise'''
+        costs = {node: float('inf') for node in self.nodes()}
+        costs[n1] = 0
+
+        while binheap:
+            cost, node = heapq.heappop(binheap)
+
+            for child_node in self.connected(node):
+                new_cost = costs[node] + self.cost(node, child_node)
+                if costs[child_node] > new_cost:
+                    costs[child_node] = new_cost
+                    heapq.heappush(binheap, (new_cost, child_node))
+
+        return costs
+
+    def bellmanford(self, start):
+        """solves shortest path problem if edges may have negative weights"""
+        distance = {}
+        predecessor = {}
+
+        # Step 1: Initialize
+        for vertex in self.dict_graph:
+            if vertex == start:
+                distance[vertex] = 0
+            else:
+                distance[vertex] = 99999
+                predecessor[vertex] = None
+
+        # Step 2: Relax edges repeatedly
+        for vertex in self.dict_graph:
+            for _from, _to in self.edges():
+                if distance[_from] + self.cost(_from, _to) < distance[_to]:
+                    distance[_to] = distance[_from] + self.cost(_from, _to)
+                    predecessor[_to] = _from
+
+        # Step 3: Check for negative-weight cycles
+        for _from, _to in self.edges():
+            if distance[_from] + self.cost(_from, _to) < distance[_to]:
+                return "Graph contains a negative-weight cycle"
+        return distance
+
+
+if __name__ == '__main__':
+    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('b', 'c', 1), ('c', 'd', 1)])
+    print graph.dijkstra('a')
