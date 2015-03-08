@@ -26,7 +26,6 @@ def test_del_nodes():
     g.del_node('a')
     assert 'a' not in g.nodes()
     assert g.has_node('a') is False
-    assert g.nodes() == ['c', 'b']
 
 
 def test_del_error():
@@ -217,11 +216,5 @@ def test_weighted_edges_with_node_delete():
 
 
 def test_dijkstra():
-    g = SimpleGraph()
-    g.add_edge('a', 'b', 5)
-    g.add_edge('a', 'c', 3)
-    g.add_edge('b', 'd', 6)
-    g.add_edge('b', 'e', 2)
-    g.add_edge('e', 'f', 6)
-    g.add_edge('f', 'g', 8)
-    assert g.dict_graph.dijkstra['a', 'g'] == ['H', 'F', 'B']
+    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('a', 'g', 1), ('g', 'b', 1)])
+    assert graph.dijkstra('a') == {'a': 0, 'b': 2, 'g': 1}
