@@ -132,5 +132,5 @@ class SimpleGraph(object):
 
 
 if __name__ == '__main__':
-    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('a', 'g', 1), ('g', 'b', 1)])
+    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('b', 'c', 1), ('c', 'd', 1)])
     print graph.dijkstra('a')
