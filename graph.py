@@ -122,7 +122,7 @@ class SimpleGraph(object):
         while binheap:
             cost, node = heapq.heappop(binheap)
 
-            for child_node in self.connected(n1):
+            for child_node in self.connected(node):
                 new_cost = costs[node] + self.cost(node, child_node)
                 if costs[child_node] > new_cost:
                     costs[child_node] = new_cost
