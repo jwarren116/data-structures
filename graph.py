@@ -129,10 +129,12 @@ class SimpleGraph(object):
 
         return costs
 
-    def bellmanford(self, start, goal):
+    def bellmanford(self, start):
+        """solves shortest path problem if edges may have negative weights"""
         distance = {}
         predecessor = {}
 
+        # Step 1: Initialize
         for vertex in self.dict_graph:
             if vertex == start:
                 distance[vertex] = 0
@@ -140,48 +142,18 @@ class SimpleGraph(object):
                 distance[vertex] = 99999
                 predecessor[vertex] = None
 
+        # Step 2: Relax edges repeatedly
         for vertex in self.dict_graph:
             for _from, _to in self.edges():
                 if distance[_from] + self.cost(_from, _to) < distance[_to]:
                     distance[_to] = distance[_from] + self.cost(_from, _to)
                     predecessor[_to] = _from
 
+        # Step 3: Check for negative-weight cycles
         for _from, _to in self.edges():
             if distance[_from] + self.cost(_from, _to) < distance[_to]:
                 return "Graph contains a negative-weight cycle"
-        return distance, predecessor
-
-
-    # def a_star(self, start, goal):
-    #     closedset = set()
-    #     openset = set()
-    #     current = start
-    #     openset.add(current)
-          
-    #     while openset:
-    #         current = min(openset, key=lambda o:o.g + o.h)
-    #         if current == goal:
-    #             path = []
-    #             while current.parent:
-    #                 path.append(current)
-    #                 current = current.parent
-    #             path.append(current)
-    #             return path[::-1]
-     
-    #         openset.remove(current)
-    #         closedset.add(current)
-    #         # for neighbor in neighbors(current):
-    #         #     if neighbor in closedset:
-    #         #         continue
-    #         #     tentative_g_score = g_score[current] + dist_between(current,neighbor)
-     
-    #         #     if neighbor not in openset or tentative_g_score < g_score[neighbor]:
-    #         #         came_from[neighbor] = current
-    #         #         g_score[neighbor] = tentative_g_score
-    #         #         f_score[neighbor] = g_score[neighbor] + heuristic_cost_estimate(neighbor, goal)
-    #         #         if neighbor not in openset:
-    #         #             openset.append(neighbor)
-    #     return "Unable to reach node"
+        return distance
 
 
 if __name__ == '__main__':
