@@ -216,5 +216,20 @@ def test_weighted_edges_with_node_delete():
 
 
 def test_dijkstra():
-    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5), ('a', 'g', 1), ('g', 'b', 1)])
+    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5),
+                         ('a', 'g', 1), ('g', 'b', 1)])
     assert graph.dijkstra('a') == {'a': 0, 'b': 2, 'g': 1}
+
+
+def test_bellman_ford():
+    """basic Bellman Ford algorithm test"""
+    graph = SimpleGraph([('a', 'b', 6), ('b', 'a', 5),
+                         ('a', 'g', 1), ('g', 'b', 1)])
+    assert graph.bellmanford('a') == {'a': 0, 'b': 2, 'g': 1}
+
+
+def test_bellman_ford_negative():
+    """Bellman Ford algorithm test with negative cycle"""
+    graph = SimpleGraph([('a', 'b', -1), ('b', 'a', -3),
+                         ('a', 'g', 1), ('g', 'b', 1)])
+    assert graph.bellmanford('a') == 'Graph contains a negative-weight cycle'
