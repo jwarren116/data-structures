@@ -108,7 +108,6 @@ class SimpleGraph(object):
         self._depth_first_visitor(start, set(), return_value)
         return return_value
 
-
     def dijkstra(self, n1):
         '''Using a binary heap to traverse the graph'''
         binheap = [(0, n1)]
@@ -129,6 +128,28 @@ class SimpleGraph(object):
                     heapq.heappush(binheap, (new_cost, child_node))
 
         return costs
+
+    def bellmanford(self, start, goal):
+        distance = {}
+        predecessor = {}
+
+        for vertex in self.dict_graph:
+            if vertex == start:
+                distance[vertex] = 0
+            else:
+                distance[vertex] = 99999
+                predecessor[vertex] = None
+
+        for vertex in self.dict_graph:
+            for _from, _to in self.edges():
+                if distance[_from] + self.cost(_from, _to) < distance[_to]:
+                    distance[_to] = distance[_from] + self.cost(_from, _to)
+                    predecessor[_to] = _from
+
+        for _from, _to in self.edges():
+            if distance[_from] + self.cost(_from, _to) < distance[_to]:
+                return "Graph contains a negative-weight cycle"
+        return distance, predecessor
 
 
     # def a_star(self, start, goal):
