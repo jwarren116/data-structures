@@ -1,3 +1,5 @@
+import heapq
+
 
 class SimpleGraph(object):
     '''This is a simple graph program that will allow us
@@ -89,3 +91,35 @@ class SimpleGraph(object):
 
     def dijkstra(self, start, destination):
         pass
+
+
+    def a_star(self, start, goal):
+        closedset = set()
+        openset = set()
+        current = start
+        openset.add(current)
+          
+        while openset:
+            current = min(openset, key=lambda o:o.g + o.h)
+            if current == goal:
+                path = []
+                while current.parent:
+                    path.append(current)
+                    current = current.parent
+                path.append(current)
+                return path[::-1]
+     
+            openset.remove(current)
+            closedset.add(current)
+            # for neighbor in neighbors(current):
+            #     if neighbor in closedset:
+            #         continue
+            #     tentative_g_score = g_score[current] + dist_between(current,neighbor)
+     
+            #     if neighbor not in openset or tentative_g_score < g_score[neighbor]:
+            #         came_from[neighbor] = current
+            #         g_score[neighbor] = tentative_g_score
+            #         f_score[neighbor] = g_score[neighbor] + heuristic_cost_estimate(neighbor, goal)
+            #         if neighbor not in openset:
+            #             openset.append(neighbor)
+        return "Unable to reach node"
