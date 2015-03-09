@@ -20,5 +20,7 @@ We added a graph that includes traversal. Our graph can do both depth first, and
 
 We have added weighted edges to our graph. Our edges() function does not return weights. Weights can be viewed in the dictionary containing the nodes and edges.
 
+For our weighted graph, we have added two methods of solving the shortest path problem. The first method uses Dijkstra's algorithm, the second uses the Bellman Ford algorithm. Both methods are very similar. The primary benefit of the Bellman Ford algorithm is the detection of negative weight cycles. Negative weight cycles can skew path results into the negative with loops of negative weights. Our primary resources in implementing these algorithms were the [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm) article and the [Bellman Ford algorithm](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm) article on Wikipedia.
+
 
 This repository is a collaboration between Jake Anderson and James Warren while attending the Code Fellows Python Development Accelerator in Winter 2015.
